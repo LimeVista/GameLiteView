@@ -94,7 +94,7 @@ public interface GameLiteView extends Drawable.Callback, KeyEvent.Callback,
     void onDestroy();
 
     /**
-     * 获得帧率延迟 1000 / FPS
+     * 获得帧率延迟 1000 / FPS (V16); 1000 / FPS - OnDrawTime(V23+)
      *
      * @return 帧率延迟
      */
