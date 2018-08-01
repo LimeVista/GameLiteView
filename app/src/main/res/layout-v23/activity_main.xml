@@ -6,7 +6,7 @@
     android:background="@android:color/white"
     tools:context=".MainActivity">
 
-    <me.limeice.android.g2d.GameLiteViewV16
+    <me.limeice.android.g2d.GameLiteViewV23
         android:id="@+id/game_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

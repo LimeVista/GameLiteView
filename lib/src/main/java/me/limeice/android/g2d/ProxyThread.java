@@ -35,9 +35,11 @@ final class ProxyThread implements Runnable {
     public void run() {
         while (isStart) {
             mLite.postInvalidateCompat();
+            final int d = mLite.getDelay();
+            if (d <= 0) continue;
             synchronized (NOTIFY) {
                 try {
-                    NOTIFY.wait(mLite.getDelay());
+                    NOTIFY.wait(d);
                 } catch (InterruptedException e) {
                     //
                 }

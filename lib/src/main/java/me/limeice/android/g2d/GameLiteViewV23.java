@@ -28,7 +28,7 @@ public class GameLiteViewV23 extends SurfaceView implements GameLiteView,
     private final ProxyThread mProxy = new ProxyThread(this);
     private boolean isSurfaceCreated = false;
     private boolean requestStart = false;
-
+    private int mOffsetTime = 0;
 
     public GameLiteViewV23(Context context) {
         this(context, null);
@@ -60,12 +60,14 @@ public class GameLiteViewV23 extends SurfaceView implements GameLiteView,
      */
     @Override
     public synchronized void postInvalidateCompat() {
+        final long time = System.currentTimeMillis();
         final Surface surface = getHolder().getSurface();
         Canvas canvas = surface.lockHardwareCanvas();
         if (canvas == null)
             return;
         onDraw.onDrawFrame(canvas);
         surface.unlockCanvasAndPost(canvas);
+        mOffsetTime = (int) (System.currentTimeMillis() - time);
     }
 
     /**
@@ -180,7 +182,8 @@ public class GameLiteViewV23 extends SurfaceView implements GameLiteView,
      */
     @Override
     public int getDelay() {
-        return mDelay;
+        final int d = mDelay - mOffsetTime;
+        return d > 0 ? d : 0;
     }
 
     /**
